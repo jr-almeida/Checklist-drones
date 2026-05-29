@@ -1,563 +1,42 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>
-        Checklist de Verificação de Software de Drone Agrícola GTEEX
-    </title>
-
-    <!-- BIBLIOTECAS -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Verificação de Software de Drone Agrícola GTEEX</title>
 
     <style>
-
         :root {
-
             --primary-color: #1b4332;
-
             --secondary-color: #2d6a4f;
-
             --bg-light: #f4f9f4;
-
             --text-color: #2d3748;
-
             --border-color: #cbd5e1;
         }
+```html id="h7bw14"
+<!-- COLE ANTES DO </body> -->
 
-        body {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-            font-family:
-                'Segoe UI',
-                Tahoma,
-                Geneva,
-                Verdana,
-                sans-serif;
-
-            line-height: 1.6;
-
-            margin: 40px auto;
-
-            max-width: 850px;
-
-            color: var(--text-color);
-
-            padding: 0 20px;
-
-            background-color: #fafafa;
-        }
-
-        .checklist-container {
-
-            background: #ffffff;
-
-            padding: 40px;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        h1 {
-
-            text-align: center;
-
-            color: var(--primary-color);
-
-            font-size: 26px;
-
-            margin-bottom: 5px;
-
-            font-weight: 700;
-        }
-
-        .subtitle {
-
-            text-align: center;
-
-            color: #64748b;
-
-            font-size: 14px;
-
-            margin-bottom: 30px;
-        }
-
-        .info-table {
-
-            width: 100%;
-
-            border-collapse: collapse;
-
-            margin-bottom: 30px;
-
-            background-color: var(--bg-light);
-
-            border-radius: 6px;
-
-            overflow: hidden;
-
-            border: 1px solid #d1e7dd;
-        }
-
-        .info-table th {
-
-            background-color: var(--primary-color);
-
-            color: white;
-
-            padding: 12px 15px;
-
-            text-align: left;
-
-            font-size: 14px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.5px;
-        }
-
-        .info-table td {
-
-            padding: 10px 15px;
-
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .info-table tr:last-child td {
-
-            border-bottom: none;
-        }
-
-        .info-table label {
-
-            font-weight: 600;
-
-            color: var(--primary-color);
-
-            font-size: 14px;
-        }
-
-        .info-table input {
-
-            width: 100%;
-
-            padding: 8px 10px;
-
-            border: 1px solid var(--border-color);
-
-            border-radius: 4px;
-
-            font-size: 14px;
-
-            box-sizing: border-box;
-
-            background-color: #ffffff;
-        }
-
-        .description {
-
-            color: #475569;
-
-            font-size: 15px;
-
-            margin-bottom: 35px;
-
-            padding-left: 10px;
-
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        h2 {
-
-            color: var(--primary-color);
-
-            font-size: 18px;
-
-            border-bottom: 2px solid #d1e7dd;
-
-            padding-bottom: 6px;
-
-            margin-top: 35px;
-
-            margin-bottom: 15px;
-
-            font-weight: 600;
-        }
-
-        .checklist-group {
-
-            display: grid;
-
-            grid-template-columns: 1fr;
-
-            gap: 8px;
-        }
-
-        .checklist-item {
-
-            display: flex;
-
-            align-items: center;
-
-            padding: 8px 12px;
-
-            background: #ffffff;
-
-            border: 1px solid #f1f5f9;
-
-            border-radius: 6px;
-        }
-
-        .checklist-item input[type="checkbox"] {
-
-            appearance: none;
-
-            -webkit-appearance: none;
-
-            height: 20px;
-
-            width: 20px;
-
-            border: 2px solid var(--border-color);
-
-            border-radius: 4px;
-
-            cursor: pointer;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            margin-right: 14px;
-
-            flex-shrink: 0;
-
-            background-color: #fff;
-        }
-
-        .checklist-item input[type="checkbox"]:checked {
-
-            background-color: var(--secondary-color);
-
-            border-color: var(--secondary-color);
-        }
-
-        .checklist-item input[type="checkbox"]:checked:after {
-
-            content: '✓';
-
-            color: white;
-
-            font-size: 14px;
-
-            font-weight: bold;
-        }
-
-        .checklist-item label {
-
-            cursor: pointer;
-
-            font-size: 15px;
-
-            color: #334155;
-
-            user-select: none;
-
-            width: 100%;
-        }
-
-        textarea {
-
-            width: 100%;
-
-            height: 120px;
-
-            padding: 12px;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 5px;
-
-            font-family: inherit;
-
-            resize: vertical;
-
-            box-sizing: border-box;
-        }
-
-        .btn-container {
-
-            text-align: center;
-
-            margin-top: 35px;
-        }
-
-        .pdf-button {
-
-            background-color: #2d6a4f;
-
-            color: white;
-
-            padding: 14px 30px;
-
-            border: none;
-
-            border-radius: 6px;
-
-            font-weight: bold;
-
-            font-size: 15px;
-
-            cursor: pointer;
-        }
-
-        .status {
-
-            margin-top: 15px;
-
-            text-align: center;
-
-            font-size: 14px;
-
-            color: #1b4332;
-
-            font-weight: bold;
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-<div class="checklist-container" id="area-pdf">
-
-    <h1>
-        Checklist de Verificação de Software de Drone Agrícola GTEEX
-    </h1>
-
-    <div class="subtitle">
-        Controle de Qualidade e Ativação técnica
-    </div>
-
-    <table class="info-table">
-
-        <thead>
-
-            <tr>
-
-                <th style="width:35%;">
-                    Campo
-                </th>
-
-                <th style="width:65%;">
-                    Preencher aqui
-                </th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-
-                <td>
-                    <label for="piloto">
-                        Nome do Piloto
-                    </label>
-                </td>
-
-                <td>
-                    <input
-                        type="text"
-                        id="piloto"
-                        placeholder="Nome do responsável">
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-                    <label for="chassi">
-                        Chassi do Drone
-                    </label>
-                </td>
-
-                <td>
-                    <input
-                        type="text"
-                        id="chassi"
-                        placeholder="Número de série">
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-                    <label for="data-hora">
-                        Data e Hora
-                    </label>
-                </td>
-
-                <td>
-                    <input
-                        type="datetime-local"
-                        id="data-hora">
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-                    <label for="cliente">
-                        Cliente Final
-                    </label>
-                </td>
-
-                <td>
-                    <input
-                        type="text"
-                        id="cliente"
-                        placeholder="Cliente">
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-                    <label for="concessionario">
-                        Concessionário
-                    </label>
-                </td>
-
-                <td>
-                    <input
-                        type="text"
-                        id="concessionario"
-                        placeholder="Revenda">
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
-
-    <p class="description">
-
-        Este documento apresenta um checklist detalhado para a verificação
-        do software de drones agrícolas da marca GTEEX.
-
-    </p>
-
-    <form>
-
-        <h2>
-            1. Operações Básicas e Controle de Voo
-        </h2>
-
-        <div class="checklist-group">
-
-            <div class="checklist-item">
-                <input type="checkbox" id="flight-1">
-                <label for="flight-1">
-                    Desbloqueio/Bloqueio do drone
-                </label>
-            </div>
-
-            <div class="checklist-item">
-                <input type="checkbox" id="flight-2">
-                <label for="flight-2">
-                    Voo em todos os modos manuais
-                </label>
-            </div>
-
-            <div class="checklist-item">
-                <input type="checkbox" id="flight-3">
-                <label for="flight-3">
-                    Retornar para Casa (RTH)
-                </label>
-            </div>
-
-            <div class="checklist-item">
-                <input type="checkbox" id="flight-4">
-                <label for="flight-4">
-                    Modo Extremo
-                </label>
-            </div>
-
-        </div>
-
-        <h2>
-            Observações
-        </h2>
-
-        <textarea
-            id="txt-observations"
-            placeholder="Digite observações adicionais..."></textarea>
-
-    </form>
-
-</div>
-
-<div class="btn-container">
-
-    <button
-        id="btn-pdf"
-        class="pdf-button"
-        onclick="gerarPDF()">
-
-        Salvar PDF no Google Drive
-
-    </button>
-
-    <div
-        class="status"
-        id="status-envio">
-    </div>
-
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 
 async function gerarPDF() {
 
-    const botao =
-        document.getElementById("btn-pdf");
-
-    const status =
-        document.getElementById("status-envio");
-
     try {
+
+        const botao =
+            document.getElementById("btn-pdf");
 
         botao.disabled = true;
 
         botao.innerText =
             "Gerando PDF...";
 
-        status.innerText =
-            "";
-
         const elemento =
-            document.getElementById("area-pdf");
+            document.body;
 
         const canvas =
             await html2canvas(elemento, {
@@ -600,18 +79,23 @@ async function gerarPDF() {
         );
 
         const piloto =
+
             document
             .getElementById("piloto")
-            .value
-            || "Sem_Nome";
+            .value ||
+
+            "Sem_Nome";
 
         const chassi =
+
             document
             .getElementById("chassi")
-            .value
-            || "Sem_Chassi";
+            .value ||
+
+            "Sem_Chassi";
 
         const data =
+
             new Date()
             .toISOString()
             .split("T")[0];
@@ -631,7 +115,7 @@ async function gerarPDF() {
 
         const resposta = await fetch(
 
-            "COLE_AQUI_A_URL_DO_APPS_SCRIPT",
+            "https://drive.google.com/drive/u/0/folders/0AEx8-e507A-dUk9PVA",
 
             {
 
@@ -664,17 +148,13 @@ async function gerarPDF() {
             botao.innerText =
                 "PDF enviado ✓";
 
-            status.innerHTML =
+            alert(
 
-                "PDF salvo com sucesso<br><br>" +
+                "PDF enviado com sucesso!\n\n"
 
-                "<a href='" +
-                resultado.url +
-                "' target='_blank'>" +
+                + resultado.url
 
-                "Abrir PDF no Google Drive" +
-
-                "</a>";
+            );
 
         } else {
 
@@ -688,27 +168,423 @@ async function gerarPDF() {
 
         console.error(erro);
 
-        botao.innerText =
-            "Erro ao enviar";
-
-        status.innerText =
-            erro;
-
         alert(
-
-            "Erro ao gerar ou enviar PDF"
-
+            "Erro ao gerar PDF"
         );
 
     }
 
-    botao.disabled = false;
+    document
+        .getElementById("btn-pdf")
+        .disabled = false;
 
 }
 
 </script>
+```
+
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 850px;
+            color: var(--text-color);
+            padding: 0 20px;
+            background-color: #fafafa;
+        }
+
+        .checklist-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 26px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: var(--bg-light);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #d1e7dd;
+        }
+
+        .info-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-table label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .info-table input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        .description {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 35px;
+            padding-left: 10px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 18px;
+            border-bottom: 2px solid #d1e7dd;
+            padding-bottom: 6px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .checklist-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            border-radius: 6px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            flex-shrink: 0;
+            background-color: #fff;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .checklist-item input[type="checkbox"]:checked:after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            font-size: 15px;
+            color: #334155;
+            user-select: none;
+            width: 100%;
+        }
+
+        .observations-container {
+            margin-top: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-family: inherit;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: #2d6a4f;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        @media print {
+            .btn-container {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+                margin: 0;
+                padding: 0;
+            }
+
+            .checklist-container {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="checklist-container">
+
+    <h1>Checklist de Verificação de Software de Drone Agrícola GTEEX</h1>
+    <div class="subtitle">Controle de Qualidade e Ativação Técnica</div>
+
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th style="width:35%;">Campo</th>
+                <th style="width:65%;">Preencher aqui</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><label for="piloto">Nome do Piloto</label></td>
+                <td><input type="text" id="piloto"></td>
+            </tr>
+
+            <tr>
+                <td><label for="chassi">Chassi do Drone</label></td>
+                <td><input type="text" id="chassi"></td>
+            </tr>
+
+            <tr>
+                <td><label for="data-hora">Data e Hora</label></td>
+                <td><input type="datetime-local" id="data-hora"></td>
+            </tr>
+
+            <tr>
+                <td><label for="cliente">Cliente Final</label></td>
+                <td><input type="text" id="cliente"></td>
+            </tr>
+
+            <tr>
+                <td><label for="concessionario">Concessionário</label></td>
+                <td><input type="text" id="concessionario"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="description">
+        Este documento apresenta um checklist detalhado para a verificação
+        do software de drones agrícolas da marca GTEEX.
+    </p>
+
+    <form>
+
+        <h2>1. Operações Básicas e Controle de Voo</h2>
+
+        <div class="checklist-group">
+
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-1">
+                <label for="flight-1">Desbloqueio/Bloqueio do drone</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-2">
+                <label for="flight-2">
+                    Voo em todos os modos manuais
+                </label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-3">
+                <label for="flight-3">Retornar para Casa (RTH)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-4">
+                <label for="flight-4">Modo Extremo</label>
+            </div>
+
+        </div>
+
+        <h2>2. Mapeamento e Planejamento</h2>
+
+        <div class="checklist-group">
+
+            <div class="checklist-item">
+                <input type="checkbox" id="map-1">
+                <label for="map-1">Criação de mapas</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="map-2">
+                <label for="map-2">Upload e download de mapas</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="map-3">
+                <label for="map-3">Importação de mapa KML</label>
+            </div>
+
+        </div>
+
+        <h2>3. Calibração e Manutenção</h2>
+
+        <div class="checklist-group">
+
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-1">
+                <label for="cal-1">Calibrações totais</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-2">
+                <label for="cal-2">Atualização de componentes</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-3">
+                <label for="cal-3">Atualização de controle</label>
+            </div>
+
+        </div>
+
+        <h2>4. Pulverização e Aplicação</h2>
+
+        <div class="checklist-group">
+
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-1">
+                <label for="spray-1">Ativação de bicos</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-2">
+                <label for="spray-2">Radar manual</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-3">
+                <label for="spray-3">Troca de faixa em U</label>
+            </div>
+
+        </div>
+
+        <h2>5. Relatórios e Conectividade</h2>
+
+        <div class="checklist-group">
+
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-1">
+                <label for="conn-1">Relatórios no Controle</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-2">
+                <label for="conn-2">Relatórios no APP</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-3">
+                <label for="conn-3">Conectividade com bateria</label>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="observations-container">
+        <label for="txt-observations"
+               style="display:block;
+               font-weight:bold;
+               color:#1b4332;
+               margin-bottom:8px;">
+            Observações:
+        </label>
+
+        <textarea id="txt-observations"
+            placeholder="Digite observações adicionais...">
+        </textarea>
+    </div>
+
+   ```html id="wzhfmu"
+<div class="btn-container" style="text-align: center; margin-top: 35px;">
+
+    <button
+
+        id="btn-pdf"
+
+        onclick="gerarPDF()"
+
+        style="
+            background-color: #2d6a4f;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        ">
+
+        Salvar PDF no Google Drive
+
+    </button>
+
+</div>
+```
 
 </body>
-
 </html>
 ```
