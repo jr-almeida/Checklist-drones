@@ -1,26 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>
-        Checklist de Verificação de Software de Drone Agrícola GTEEX
-    </title>
-
-    <!-- BIBLIOTECAS PDF -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Verificação de Software de Drone Agrícola GTEEX</title>
     <style>
-
         :root {
             --primary-color: #1b4332;
             --secondary-color: #2d6a4f;
@@ -30,636 +14,445 @@
         }
 
         body {
-
-            font-family: 'Segoe UI',
-                         Tahoma,
-                         Geneva,
-                         Verdana,
-                         sans-serif;
-
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-
             margin: 40px auto;
-
             max-width: 850px;
-
             color: var(--text-color);
-
             padding: 0 20px;
-
             background-color: #fafafa;
         }
 
         .checklist-container {
-
             background: #ffffff;
-
             padding: 40px;
-
             border-radius: 8px;
-
-            box-shadow:
-                0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         h1 {
-
             text-align: center;
-
             color: var(--primary-color);
-
             font-size: 26px;
-
             margin-bottom: 5px;
-
             font-weight: 700;
         }
 
         .subtitle {
-
             text-align: center;
-
             color: #64748b;
-
             font-size: 14px;
-
             margin-bottom: 30px;
         }
 
+        /* Cabeçalho Bonito / Tabela de Informações */
         .info-table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             margin-bottom: 30px;
-
             background-color: var(--bg-light);
-
             border-radius: 6px;
-
             overflow: hidden;
-
             border: 1px solid #d1e7dd;
         }
 
         .info-table th {
-
             background-color: var(--primary-color);
-
             color: white;
-
             padding: 12px 15px;
-
             text-align: left;
-
             font-size: 14px;
-
             text-transform: uppercase;
-
             letter-spacing: 0.5px;
         }
 
         .info-table td {
-
             padding: 10px 15px;
-
             border-bottom: 1px solid #e2e8f0;
         }
 
         .info-table tr:last-child td {
-
             border-bottom: none;
         }
 
         .info-table label {
-
             font-weight: 600;
-
             color: var(--primary-color);
-
             font-size: 14px;
         }
 
         .info-table input {
-
             width: 100%;
-
             padding: 8px 10px;
-
             border: 1px solid var(--border-color);
-
             border-radius: 4px;
-
             font-size: 14px;
-
             box-sizing: border-box;
-
             background-color: #ffffff;
-
             transition: border-color 0.2s;
         }
 
         .info-table input:focus {
-
             outline: none;
-
             border-color: var(--secondary-color);
-
-            box-shadow:
-                0 0 0 3px rgba(45, 106, 79, 0.1);
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
         }
 
         .description {
-
             color: #475569;
-
             font-size: 15px;
-
             margin-bottom: 35px;
-
             padding-left: 10px;
-
             border-left: 4px solid var(--secondary-color);
         }
 
+        /* Seções do Checklist */
         h2 {
-
             color: var(--primary-color);
-
             font-size: 18px;
-
             border-bottom: 2px solid #d1e7dd;
-
             padding-bottom: 6px;
-
             margin-top: 35px;
-
             margin-bottom: 15px;
-
             font-weight: 600;
         }
 
         .checklist-group {
-
             display: grid;
-
             grid-template-columns: 1fr;
-
             gap: 8px;
         }
 
         .checklist-item {
-
             display: flex;
-
             align-items: center;
-
             padding: 8px 12px;
-
             background: #ffffff;
-
             border: 1px solid #f1f5f9;
-
             border-radius: 6px;
-
             transition: background-color 0.2s;
         }
 
         .checklist-item:hover {
-
             background-color: #f8fafc;
         }
 
         .checklist-item input[type="checkbox"] {
-
             appearance: none;
-
             -webkit-appearance: none;
-
             height: 20px;
-
             width: 20px;
-
             border: 2px solid var(--border-color);
-
             border-radius: 4px;
-
             cursor: pointer;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             margin-right: 14px;
-
             flex-shrink: 0;
-
             background-color: #fff;
-
             transition: all 0.2s;
         }
 
         .checklist-item input[type="checkbox"]:checked {
-
             background-color: var(--secondary-color);
-
             border-color: var(--secondary-color);
         }
 
         .checklist-item input[type="checkbox"]:checked:after {
-
             content: '✓';
-
             color: white;
-
             font-size: 14px;
-
             font-weight: bold;
         }
 
         .checklist-item label {
-
             cursor: pointer;
-
             font-size: 15px;
-
             color: #334155;
-
             user-select: none;
-
             width: 100%;
         }
 
-        textarea {
-
-            width: 100%;
-
-            height: 120px;
-
-            padding: 12px;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 5px;
-
-            font-family: inherit;
-
-            resize: vertical;
-
-            box-sizing: border-box;
-        }
-
-        .btn-container {
-
-            text-align: center;
-
-            margin-top: 35px;
-        }
-
-        .pdf-button {
-
-            background-color: #2d6a4f;
-
-            color: white;
-
-            padding: 14px 30px;
-
-            border: none;
-
-            border-radius: 6px;
-
-            font-weight: bold;
-
-            font-size: 15px;
-
-            cursor: pointer;
-        }
-
-        .pdf-button:hover {
-
-            opacity: 0.95;
-        }
-
+        /* Estilos para Impressão / PDF */
         @media print {
-
-            .btn-container {
-                display: none !important;
-            }
-
-            body {
-                background: #fff;
-            }
-
-            .checklist-container {
-                box-shadow: none;
-            }
+            body { background: #fff; margin: 0; padding: 0; }
+            .checklist-container { box-shadow: none; padding: 0; }
+            .info-table th { background-color: #1b4332 !important; color: #fff !important; -webkit-print-color-adjust: exact; }
+            .info-table { background-color: transparent !important; }
+            .info-table input { border: none; border-bottom: 1px solid #000; border-radius: 0; padding: 2px; }
+            .checklist-item input[type="checkbox"] { border: 2px solid #000 !important; }
+            .checklist-item input[type="checkbox"]:checked { background-color: #000 !important; }
         }
-
     </style>
-
 </head>
-
 <body>
 
-<div class="checklist-container" id="area-pdf">
-
-    <h1>
-        Checklist de Verificação de Software de Drone Agrícola GTEEX
-    </h1>
-
-    <div class="subtitle">
-        Controle de Qualidade e Ativação técnica
-    </div>
+<div class="checklist-container">
+    <h1>Checklist de Verificação de Software de Drone Agrícola GTEEX</h1>
+    <div class="subtitle">Controle de Qualidade e Ativação técnica</div>
 
     <table class="info-table">
-
         <thead>
-
             <tr>
-
-                <th style="width:35%;">
-                    Campo
-                </th>
-
-                <th style="width:65%;">
-                    Preencher aqui
-                </th>
-
+                <th style="width: 35%;">Campo</th>
+                <th style="width: 65%;">Preencher aqui</th>
             </tr>
-
         </thead>
-
         <tbody>
-
             <tr>
-
-                <td>
-                    <label for="piloto">
-                        Nome do Piloto
-                    </label>
-                </td>
-
-                <td>
-                    <input type="text"
-                           id="piloto"
-                           placeholder="Nome do responsável">
-                </td>
-
+                <td><label for="piloto">Nome do Piloto</label></td>
+                <td><input type="text" id="piloto" placeholder="Nome do responsável pela operação"></td>
             </tr>
-
             <tr>
-
-                <td>
-                    <label for="chassi">
-                        Chassi do Drone
-                    </label>
-                </td>
-
-                <td>
-                    <input type="text"
-                           id="chassi"
-                           placeholder="Número de série">
-                </td>
-
+                <td><label for="chassi">Chassi do Drone</label></td>
+                <td><input type="text" id="chassi" placeholder="Número de série / Chassi"></td>
             </tr>
-
             <tr>
-
-                <td>
-                    <label for="data-hora">
-                        Data e Hora
-                    </label>
-                </td>
-
-                <td>
-                    <input type="datetime-local"
-                           id="data-hora">
-                </td>
-
+                <td><label for="data-hora">Data e Hora</label></td>
+                <td><input type="datetime-local" id="data-hora"></td>
             </tr>
-
             <tr>
-
-                <td>
-                    <label for="cliente">
-                        Cliente Final
-                    </label>
-                </td>
-
-                <td>
-                    <input type="text"
-                           id="cliente"
-                           placeholder="Cliente">
-                </td>
-
+                <td><label for="cliente">Cliente Final</label></td>
+                <td><input type="text" id="cliente" placeholder="Nome do cliente/propriedade"></td>
             </tr>
-
             <tr>
-
-                <td>
-                    <label for="concessionario">
-                        Concessionário
-                    </label>
-                </td>
-
-                <td>
-                    <input type="text"
-                           id="concessionario"
-                           placeholder="Revenda">
-                </td>
-
+                <td><label for="concessionario">Concessionário</label></td>
+                <td><input type="text" id="concessionario" placeholder="Identificação da revenda"></td>
             </tr>
-
         </tbody>
-
     </table>
 
-    <p class="description">
-        Checklist completo para validação operacional,
-        calibração e ativação técnica.
-    </p>
+    <p class="description">Este documento apresenta um checklist detalhado para a verificação do software de drones agrícolas da marca GTEEX, abrangendo funcionalidades essenciais para operação, manutenção e aplicação.</p>
 
-    <h2>
-        Operações Básicas
-    </h2>
-
-    <div class="checklist-group">
-
-        <div class="checklist-item">
-            <input type="checkbox" id="c1">
-            <label for="c1">
-                Desbloqueio/Bloqueio do drone
-            </label>
+    <form>
+        <h2>1. Operações Básicas e Controle de Voo</h2>
+        <div class="checklist-group">
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-1">
+                <label for="flight-1">Desbloqueio/Bloqueio do drone</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-2">
+                <label for="flight-2">Voo em todos os modos manuais (Manual, Manual Plus, Manual A e B)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-3">
+                <label for="flight-3">Retornar para Casa (RTH)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-4">
+                <label for="flight-4">Modo Extremo (velocidade)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-5">
+                <label for="flight-5">Luzes de navegação (ligar/desligar)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="flight-6">
+                <label for="flight-6">Curso do drone</label>
+            </div>
         </div>
 
-        <div class="checklist-item">
-            <input type="checkbox" id="c2">
-            <label for="c2">
-                Retornar para Casa (RTH)
-            </label>
+        <h2>2. Mapeamento e Planejamento de Missão</h2>
+        <div class="checklist-group">
+            <div class="checklist-item">
+                <input type="checkbox" id="map-1">
+                <label for="map-1">Criação de mapas</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-2">
+                <label for="map-2">Upload e download de mapas</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-3">
+                <label for="map-3">Importação de mapa KML</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-4">
+                <label for="map-4">Mapeamento com o drone</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-5">
+                <label for="map-5">Mapeamento com o RTK</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-6">
+                <label for="map-6">Mapa em pivô</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="map-7">
+                <label for="map-7">Modo Rota Livre</label>
+            </div>
         </div>
 
-        <div class="checklist-item">
-            <input type="checkbox" id="c3">
-            <label for="c3">
-                Modo Extremo
-            </label>
+        <h2>3. Calibração e Manutenção</h2>
+        <div class="checklist-group">
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-1">
+                <label for="cal-1">Calibrações totais</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-2">
+                <label for="cal-2">Atualização de componentes (ex: BICO)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-3">
+                <label for="cal-3">Atualização de controle</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-4">
+                <label for="cal-4">Atualização de drone</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-5">
+                <label for="cal-5">Atualização de carregador</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="cal-6">
+                <label for="cal-6">Atualização de bateria</label>
+            </div>
         </div>
 
-    </div>
+        <h2>4. Funções de Pulverização e Aplicação</h2>
+        <div class="checklist-group">
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-1">
+                <label for="spray-1">Ativação de bicos (pulverização manual)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-2">
+                <label for="spray-2">Ligar ou desligar o Radar manualmente</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-3">
+                <label for="spray-3">Troca de faixa em U (aplicando)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-4">
+                <label for="spray-4">Sensor de peso</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-5">
+                <label for="spray-5">Tanque de sólidos</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-6">
+                <label for="spray-6">Divisão de encomendas</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-7">
+                <label for="spray-7">Aplicação com bordas</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-8">
+                <label for="spray-8">Aplicação somente com bordas</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="spray-9">
+                <label for="spray-9">Divisão de Rota</label>
+            </div>
+        </div>
 
-    <h2>
-        Observações
-    </h2>
-
-    <textarea
-        id="txt-observations"
-        placeholder="Digite observações adicionais...">
-    </textarea>
-
+        <h2>5. Relatórios e Conectividade</h2>
+        <div class="checklist-group">
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-1">
+                <label for="conn-1">Relatórios no Controle Remoto (informações)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-2">
+                <label for="conn-2">Relatórios no APP e Portal</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-3">
+                <label for="conn-3">Câmera e seu movimento</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-4">
+                <label for="conn-4">Conectividade com o carregador</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-5">
+                <label for="conn-5">Conectividade com a bateria</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="conn-6">
+                <label for="conn-6">Vincular um novo controle</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="observations-container" style="margin-top: 30px;">
+    <label for="txt-observations" style="display: block; font-weight: bold; color: #1b4332; margin-bottom: 8px;">Observações:</label>
+    <textarea id="txt-observations" style="width: 100%; height: 120px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 5px; font-family: inherit; resize: vertical;" placeholder="Digite aqui observações adicionais sobre os testes ou inconformidades encontradas..."></textarea>
 </div>
 
-<div class="btn-container">
+<style>
+@media print {
+    .btn-container { display: none !important; }
+}
+</style>
 
-    <button
-        id="btn-pdf"
-        class="pdf-button"
-        onclick="gerarPDF()">
+```javascript
+function doPost(e) {
 
-        Salvar PDF no Google Drive
+  try {
 
-    </button>
+    const pasta =
+      DriveApp.getFolderById(
+        "0AEx8-e507A-dUk9PVA"
+      );
 
-</div>
+    const dados =
+      JSON.parse(e.postData.contents);
 
-<script>
+    const bytes =
+      Utilities.base64Decode(
+        dados.base64
+      );
 
-async function gerarPDF() {
+    const blob =
+      Utilities.newBlob(
+        bytes,
+        'application/pdf',
+        dados.nome
+      );
 
-    try {
+    const arquivo =
+      pasta.createFile(blob);
 
-        const botao =
-            document.getElementById("btn-pdf");
+    return ContentService
+      .createTextOutput(
+        JSON.stringify({
+          status: "ok",
+          url: arquivo.getUrl()
+        })
+      )
+      .setMimeType(
+        ContentService.MimeType.JSON
+      );
 
-        botao.innerText =
-            "Gerando PDF...";
+  } catch (erro) {
 
-        const elemento =
-            document.getElementById("area-pdf");
+    return ContentService
+      .createTextOutput(
+        JSON.stringify({
+          status: "erro",
+          mensagem: erro.toString()
+        })
+      )
+      .setMimeType(
+        ContentService.MimeType.JSON
+      );
 
-        const canvas =
-            await html2canvas(elemento, {
-                scale: 2
-            });
-
-        const imgData =
-            canvas.toDataURL('image/png');
-
-        const { jsPDF } =
-            window.jspdf;
-
-        const pdf =
-            new jsPDF('p', 'mm', 'a4');
-
-        const larguraPDF = 210;
-
-        const alturaPDF =
-            (canvas.height * larguraPDF)
-            / canvas.width;
-
-        pdf.addImage(
-            imgData,
-            'PNG',
-            0,
-            0,
-            larguraPDF,
-            alturaPDF
-        );
-
-        const piloto =
-            document.getElementById("piloto").value
-            || "Sem_Nome";
-
-        const data =
-            new Date()
-            .toISOString()
-            .split("T")[0];
-
-        const nomeArquivo =
-            `Checklist_${piloto}_${data}.pdf`;
-
-        const pdfBase64 =
-            pdf.output('datauristring')
-               .split(',')[1];
-
-        botao.innerText =
-            "Enviando para o Drive...";
-
-        const resposta = await fetch(
-
-            "https://drive.google.com/drive/u/0/folders/0AEx8-e507A-dUk9PVA",
-
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    nome: nomeArquivo,
-
-                    base64: pdfBase64
-
-                })
-
-            }
-
-        );
-
-        const resultado =
-            await resposta.json();
-
-        if (resultado.status === "ok") {
-
-            botao.innerText =
-                "PDF enviado ✓";
-
-            alert(
-
-                "PDF enviado com sucesso!\n\n"
-                + resultado.url
-
-            );
-
-        } else {
-
-            botao.innerText =
-                "Erro ao enviar";
-
-            alert(resultado.mensagem);
-
-        }
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        alert(
-            "Erro ao gerar PDF"
-        );
-
-    }
+  }
 
 }
-
-</script>
+```
 
 </body>
 </html>
-```
+
+
+
